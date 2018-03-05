@@ -1,0 +1,8 @@
+- Having fixed the interpolation problem, we were able to make a number of plots of various different cross_correlation functions to test CoLoRe's output.
+	- Gaussian-QSO cross correlation with no RSD in several different (narrow) redshift bands ()
+		- Expect it to be proportional to GG autocorrelation * D(z)
+		- Roughly matches (using value of D(z) averaged over each redshift band)
+	- Gaussian-QSO cross correlation with and without RSD averaged over all redshifts ()
+		- Expect difference for different values of mu as radial velocity causes
+	- Density-QSO cross correlation 
+	- 

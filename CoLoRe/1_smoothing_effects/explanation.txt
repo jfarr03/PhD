@@ -1,0 +1,9 @@
+- One noticeable feature of the correlation function from the NGP interpolated field is that the BAO peak appears to have been spread out slightly ().
+- It seems as if this is due to the interpolation of the field.
+- A few different runs of CoLoRe were made to test the effects of different parameters on the spreading of the BAO peak:
+	- smoothing radius of the original gaussian field: 1.0, 2.0, 4.0 Mpc/h
+	- box size: 2048, 4096, 6144 cells 
+- The smoothing radius appears to have a relatively large effect on the correlation function and its BAO peak. The box size appears to have a much smaller effect.
+- The effect of changing the smoothing radius is qualitatively 'correct' in that it causes the peak to move in the same direction as one would expect, as determined by CAMB predictions ().
+
+Correlation functions made using picca/bin/do_cf.py, picca/bin/export.py, picca/plot_scripts/plot_cf_several_wedges.py

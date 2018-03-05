@@ -1,0 +1,17 @@
+- It was noticed that the Gaussian skewers did not appear to have zero mean, even far away from quasars. This is shown by the plot of mean/variance of the gaussian field as a function of rest frame wavelength (xcf1d_gaussian_0_127.pdf).
+- A consequence of non-zero mean is that the correlation function*r^2 curves upwards proportional to r^2 at large r ().
+- The physical density skewers, however, did have zero mean far away from the quasars, as shown by the same plot but for the density field (xcf1d_density_0_127.pdf).
+- The gaussian skewers had been calculated in post processing by using the inverse lognormal transformation on the physical density skewers.
+- As there was no problem with the physical density skewers, the problem must lie with the calculation of the Gaussian skewers. 
+- We thought that it may be related to the combination of the lognormal transformation and the interpolation method (cloud in cell). The current process is:
+	- CoLoRe transforms the Gaussian grid via the non-linear lognormal transformation to a physical density field
+	- it then interpolates this to make physical density skewers
+	- we then carry out the inverse transformation to 'recreate' Gaussian skewers
+- However, then nonlinearity of the transformation means that this process is not equivalent to simply interpolating the Gaussian field (i.e. CIC interpolation and the lognormal transformation do not commute).
+- To test this, we switched to nearest grid point interpolation, a more straightforward yet less physical interpolation method.
+	- CIC: weighted average of nearest 2^d cells (for d = number of dimensions)
+	- NGP: 'borrows' value of nearest cell
+- Using NGP interpolation, the mean of the Gaussian field became zero far away from the quasars (xcf1d_gaussian_NGP_0_127.pdf) and the correlation function appears to look much better ().
+
+Rest frame wavelength plots made using LyaCoLoRe/example_scripts/xcf1d.py
+Correlation functions made using picca/bin/do_cf.py, picca/bin/export.py, picca/plot_scripts/plot_cf_several_wedges.py

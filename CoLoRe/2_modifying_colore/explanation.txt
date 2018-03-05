@@ -1,0 +1,11 @@
+- In the long term, NGP interpolation is not an appropriate method to use as it is not at all physical. However we cannot use CIC on the physical density field. As such, we instead try using CIC on the Gaussian field. This involved modifying CoLoRe to add in a 'gaussian_skewers' flag
+- The skewers produced using this modification also had zero mean, though the interpolation causes a reduction in variance relative to the NGP-interpolated skewers (xcf1d_0_127_G_gaussian.pdf).
+- As a consequence, the density skewers calculated by lognormal-transforming the gaussian field are not valid, as they assume that the Gaussian skewers have the same variance as the original Gaussian field, whereas in reality it is lower.
+- This results in the density field having negative mean below a certain rest frame wavelength (xcf1d_0_127_G_physical.pdf).
+- The correction to the Gaussian skewers results in a much more sensible looking correlation function ().
+- It is also reassuring that the modified version of CoLoRe outputs produces the same results as the original version when the gaussian_skewers flag is not enabled (xcf1d_0_127_D_* and xcf1d_0_127_original_*).
+- Further, you can see that the skewers from the new version of CoLoRe are very similar indeed to the old ones, with just a small shift in the central, mean value of the field's fluctuations (new_gaussian*).
+
+Rest frame wavelength plots made using LyaCoLoRe/example_scripts/xcf1d.py
+Correlation functions made using picca/bin/do_cf.py, picca/bin/export.py, picca/plot_scripts/plot_cf_several_wedges.py
+Comparisons of individual skewers made by plotting individual skewer vs Z
