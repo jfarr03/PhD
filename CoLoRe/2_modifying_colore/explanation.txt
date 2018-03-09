@@ -1,8 +1,9 @@
 - In the long term, NGP interpolation is not an appropriate method to use as it is not at all physical. However we cannot use CIC on the physical density field. As such, we instead try using CIC on the Gaussian field. This involved modifying CoLoRe to add in a 'gaussian_skewers' flag
 - The skewers produced using this modification also had zero mean, though the interpolation causes a reduction in variance relative to the NGP-interpolated skewers (xcf1d_0_127_G_gaussian.pdf).
-- As a consequence, the density skewers calculated by lognormal-transforming the gaussian field are not valid, as they assume that the Gaussian skewers have the same variance as the original Gaussian field, whereas in reality it is lower.
-- This results in the density field having negative mean below a certain rest frame wavelength (xcf1d_0_127_G_physical.pdf).
-- The correction to the Gaussian skewers results in a much more sensible looking correlation function ().
+- As a consequence, the density skewers calculated by lognormal-transforming the gaussian field are not valid, as they assume that the Gaussian skewers have the same variance as the original Gaussian field, whereas in reality it is lower (xcf1d_0_127_G_physical_wrongSG.pdf).
+- This can be fixed in post processing: rather than producing the skewer files all at once, you first produce the Gaussian skewers, measuring the mean and variance in each pixel as you go (only using pixels far from the quasar).
+- You can then combine these to calculate the measured value of SIGMA_G over all skewers, and subsequently use that to calculate the density and then flux skewers. This corrects the problem with the density skewers.
+- The correction to the Gaussian skewers results in a much more sensible looking correlation function (xcf1d_0_127_G_physical.pdf).
 - It is also reassuring that the modified version of CoLoRe outputs produces the same results as the original version when the gaussian_skewers flag is not enabled (xcf1d_0_127_D_* and xcf1d_0_127_original_*).
 - Further, you can see that the skewers from the new version of CoLoRe are very similar indeed to the old ones, with just a small shift in the central, mean value of the field's fluctuations (new_gaussian*).
 
